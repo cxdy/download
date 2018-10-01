@@ -12,10 +12,10 @@ if(isset($_POST['redeemBtn'], $_POST['token'])){
     $required_fields = array('code', 'ip');
 
     // check empty fieldset
-	$form_errors = check_empty_fields($required_fields);
+    $form_errors = check_empty_fields($required_fields);
 
     // code check
-	$fields_to_check_length = array('code' => 12);
+    $fields_to_check_length = array('code' => 12);
 
     $form_errors = array_merge($form_errors, check_min_length($fields_to_check_length));
 
