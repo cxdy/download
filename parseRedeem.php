@@ -31,11 +31,14 @@ if(isset($_POST['redeemBtn'], $_POST['token'])){
 
     $id = $result['id'];
 
-        if(($result['is_used']) === 0){
+    // name jeff
+    echo $result['is_used'];
+
+        if(($result['is_used']) == 0){
         		// preparing and inputting data
         		try
         		{
-              $sth = $db->prepare('UPDATE codes SET is_used = "1" WHERE code = :code');
+              $sth = $db->prepare('UPDATE codes SET is_used = 1 WHERE code = :code');
               $sth->bindParam(':code', $code, PDO::PARAM_STR);
               $sth->execute();
 
@@ -50,12 +53,18 @@ if(isset($_POST['redeemBtn'], $_POST['token'])){
     		{
     		   $ex->getMessage();
     		}
-      }
-    } else {
+      } else {
       echo "This code has already been used";
     }
-
-
-
+} else {
+  //diagnostics - will remove eventually
+  echo $code;
+  echo $ip;
+  echo "===========================";
+  echo $result['id'];
+  echo $result['code'];
+  echo $result['is_used'];
+  echo $result['ip'];
+}
 }
 ?>
