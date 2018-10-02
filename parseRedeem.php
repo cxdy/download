@@ -3,8 +3,7 @@
 include_once 'Database.php';
 include_once 'utilities.php';
 
-if(isset($_POST['redeemBtn'], $_POST['token'])){
-  if(validate_token($_POST['token'])){
+if(isset($_POST['redeemBtn'])){
    // processing the form
     $form_errors = "";
 
@@ -12,16 +11,16 @@ if(isset($_POST['redeemBtn'], $_POST['token'])){
     $required_fields = array('code', 'ip');
 
     // check empty fieldset
-    $form_errors = check_empty_fields($required_fields);
+		$form_errors = check_empty_fields($required_fields);
 
-    // code check
-    $fields_to_check_length = array('code' => 12);
+		// code check
+		$fields_to_check_length = array('code' => 12);
 
     $form_errors = array_merge($form_errors, check_min_length($fields_to_check_length));
 
     //collect data to sell to the government
     $code = $_POST['code'];
-    $ip = $_POST['ip'];
+    $ip = $_SERVER['REMOTE_ADDR'];
 
     // check if code is used
     $jeff = $db->prepare('SELECT * FROM codes WHERE code = :code');
@@ -30,9 +29,6 @@ if(isset($_POST['redeemBtn'], $_POST['token'])){
     $result = $jeff->fetch(PDO::FETCH_ASSOC);
 
     $id = $result['id'];
-
-    // name jeff
-    echo $result['is_used'];
 
         if(($result['is_used']) == 0){
         		// preparing and inputting data
@@ -57,14 +53,6 @@ if(isset($_POST['redeemBtn'], $_POST['token'])){
       echo "This code has already been used";
     }
 } else {
-  //diagnostics - will remove eventually
-  echo $code;
-  echo $ip;
-  echo "===========================";
-  echo $result['id'];
-  echo $result['code'];
-  echo $result['is_used'];
-  echo $result['ip'];
-}
+    // do nothing
 }
 ?>
