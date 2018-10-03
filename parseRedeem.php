@@ -34,6 +34,13 @@ if(isset($_POST['redeemBtn'])){
         		// preparing and inputting data
         		try
         		{
+              // generate download link
+              $fuck = $code;
+              $explode = str_split($fuck);
+              sort($explode);
+              $implode = implode('', $explode);
+              $key = md5($implode);
+
               $sth = $db->prepare('UPDATE codes SET is_used = 1 WHERE code = :code');
               $sth->bindParam(':code', $code, PDO::PARAM_STR);
               $sth->execute();
@@ -42,6 +49,11 @@ if(isset($_POST['redeemBtn'])){
               $sqlagain->bindParam(':code', $code, PDO::PARAM_STR);
               $sqlagain->bindParam(':ip', $ip, PDO::PARAM_STR);
               $sqlagain->execute();
+
+              $linkshit = $db->prepare('UPDATE codes SET link = :link WHERE code = :code');
+              $linkshit->bindParam(':link', $key, PDO::PARAM_STR);
+              $linkshit->bindParam(':code', $code, PDO::PARAM_STR);
+              $linkshit->execute();
 
               echo "Redirecting you to the download..";
         }
@@ -53,6 +65,7 @@ if(isset($_POST['redeemBtn'])){
       echo "This code has already been used";
     }
 } else {
-    // do nothing
+  //do nothing
 }
+
 ?>

@@ -64,24 +64,4 @@ function getRandomBytes($nbBytes = 32)
     }
 }
 
-function _token(){
-
-    if(!isset($_SESSION['token'])){
-        $randonToken = base64_encode(openssl_random_pseudo_bytes(32));
-        return $_SESSION['token'] = $randonToken;
-    }
-
-    return $_SESSION['token'];
-}
-
-function validate_token($requestToken){
-    if(isset($_SESSION['token']) && $requestToken === $_SESSION['token']){
-        unset($_SESSION['token']);
-
-        return true;
-    }
-
-    return false;
-}
-
 ?>
