@@ -8,6 +8,18 @@ a (very very basic) download code generator/redemption/file download system
 4. ***Definitely*** modify my profanities (all files).
 5. Design a front-end. (Submit a pull request if you're feeling frisky).
 
+## File Structure
+`redeem.php` - Form to type in redemption code
+
+`parseRedeem.php` - Handling data from `redeem.php`
+
+`download.php` - Handling download
+
+`generate.php` - Handling code generation
+
+`utilities.php` - various functions
+
+
 ### Generating codes
 I decided on a very insecure method of code generation, simply because what this was built for doesn't care about security.
 It goes without saying that the `generate.php` file ***SHOULD NOT BE IN A PUBLIC FACING DIRECTORY***.
