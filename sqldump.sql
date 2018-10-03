@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Oct 03, 2018 at 02:38 AM
+-- Generation Time: Oct 03, 2018 at 06:52 AM
 -- Server version: 5.6.38
 -- PHP Version: 7.2.1
 
@@ -30,15 +30,6 @@ CREATE TABLE `codes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `codes`
---
-
-INSERT INTO `codes` (`id`, `code`, `is_used`, `ip_address`, `link`, `downloads`) VALUES
-(1, 'abcd1234jeff', 1, '::1', '', 0),
-(2, 'jeff4321abcd', 1, '::1', '', 0),
-(3, 'namejeff1234', 1, '::1', '2c37654073e5c967889ec1ecdb4a8b89', 0);
-
---
 -- Indexes for dumped tables
 --
 
@@ -56,4 +47,4 @@ ALTER TABLE `codes`
 -- AUTO_INCREMENT for table `codes`
 --
 ALTER TABLE `codes`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;

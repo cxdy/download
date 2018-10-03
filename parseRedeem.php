@@ -34,12 +34,16 @@ if(isset($_POST['redeemBtn'])){
         		// preparing and inputting data
         		try
         		{
-              // generate download link
+              // generate download link (this makes no sense but whatever)
               $fuck = $code;
               $explode = str_split($fuck);
               sort($explode);
               $implode = implode('', $explode);
-              $key = md5($implode);
+              $partOne = md5($implode);
+              $explodeTwo = str_split($partOne);
+              sort($explodeTwo);
+              $implodeTwo = implode('', $explodeTwo);
+              $key = md5($implodeTwo);
 
               $sth = $db->prepare('UPDATE codes SET is_used = 1 WHERE code = :code');
               $sth->bindParam(':code', $code, PDO::PARAM_STR);
@@ -55,14 +59,27 @@ if(isset($_POST['redeemBtn'])){
               $linkshit->bindParam(':code', $code, PDO::PARAM_STR);
               $linkshit->execute();
 
-              echo "Redirecting you to the download..";
+              // Kyle, front-end starts here.
+              /* You can do ?> anywhere and write straight HTML, or you can just parse it in PHP. Your call. */
+              /* Just make sure you start <?php again where its supposed to. */
+              echo "Your download should start automatically."; // It shouldn't, fuck that.
+              echo "<br />";
+              echo "If not, ";
+              // Modify this link (localhost:8080/DigitalDownload/ portion)
+              $link = "http://localhost:8888/DigitalDownload/download.php?code=$key";
+              ?><a href="<?php echo $link; ?>">here's your unique download link.</a>
+              <?php
+              // ...and (frontend) ends here
+              // you would do <?php here..
         }
         catch (PDOException $ex)
     		{
     		   $ex->getMessage();
     		}
       } else {
+        // and again here!
       echo "This code has already been used";
+        // but ends here
     }
 } else {
   //do nothing
