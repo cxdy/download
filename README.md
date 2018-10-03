@@ -16,7 +16,7 @@ It goes without saying that the `generate.php` file ***SHOULD NOT BE IN A PUBLIC
 
 And you'll receive an output like the following:
 ```
-Codys-MBP:DigitalDownload codykaczynski$ php -f generate.php 10
+Codys-MBP:Download codykaczynski$ php -f generate.php 10
 You have generated 10 codes.
 Hyqck5arYi5x 
 AWjEUlregLdG 
