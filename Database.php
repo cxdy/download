@@ -1,7 +1,7 @@
 <?php
 //initialize variables to hold connection parameters
 $username = 'root';
-$dsn = 'mysql:host=localhost; dbname='download';
+$dsn = 'mysql:host=localhost; dbname=download';
 $password = 'root';
 
 try{
