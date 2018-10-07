@@ -3,10 +3,9 @@
 | Download Code Generation
 | Usage: php -f redeem.php <amount-of-codes>
 | Make sure to set database info below
-| Avoid leaving this script in a public directory. You can run this anywhere on your MySQL server. 
+| Avoid leaving this script in a public directory. You can run this anywhere. 
 */
-//redoing pdo connection because fuck me
-$servername = '127.0.0.1';
+$servername = 'localhost';
 $username = 'root';
 $password = 'root';
 $db = new PDO("mysql:host=$servername;port=8889;dbname=download", $username, $password);
