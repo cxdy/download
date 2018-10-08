@@ -30,6 +30,7 @@ if(isset($_POST['redeemBtn'])){
 
     $id = $result['id'];
 
+    if(($result['code']) == $code){
         if(($result['is_used']) == 0){
         		// preparing and inputting data
         		try
@@ -69,6 +70,21 @@ if(isset($_POST['redeemBtn'])){
               $link = "http://localhost:8888/DigitalDownload/download.php?code=$key";
               ?><a href="<?php echo $link; ?>">here's your unique download link.</a>
               <?php
+
+              // Logging
+              date_default_timezone_set('America/New_York');
+              $timestamp = date('Y-m-d H:i:s');
+              $event = "Code Redeemed";
+
+              try{
+                  $logQuery = "INSERT INTO events (ip, code, timestamp, event)
+                VALUES (:ip, :code, :timestamp, :event)";
+                  $statement = $db->prepare($logQuery);
+                  $statement->execute(array(':ip' => $ip, ':code' => $code, ':timestamp' => $timestamp, ':event' => $event));
+                } catch (PDOException $ex){
+                     $result = flashMessage("An error occurred: " .$ex->getMessage());
+                }
+
               // ...and (frontend) ends here
               // you would do <?php here..
         }
@@ -79,10 +95,35 @@ if(isset($_POST['redeemBtn'])){
       } else {
         // and again here!
       echo "This code has already been used";
-        // but ends here
+      // Logging
+      date_default_timezone_set('America/New_York');
+      $timestamp = date('Y-m-d H:i:s');
+      $event = "Redemption code has been used.";
+
+      try{
+          $logQuery = "INSERT INTO events (ip, code, timestamp, event)
+        VALUES (:ip, :code, :timestamp, :event)";
+          $statement = $db->prepare($logQuery);
+          $statement->execute(array(':ip' => $ip, ':code' => $code, ':timestamp' => $timestamp, ':event' => $event));
+        } catch (PDOException $ex){
+             $result = flashMessage("An error occurred: " .$ex->getMessage());
+        }
     }
 } else {
-  //do nothing
-}
+  echo "You have entered an invalid redemption code";
+  // Logging
+  date_default_timezone_set('America/New_York');
+  $timestamp = date('Y-m-d H:i:s');
+  $event = "Invalid Redemption Code";
 
+  try{
+      $logQuery = "INSERT INTO events (ip, code, timestamp, event)
+    VALUES (:ip, :code, :timestamp, :event)";
+      $statement = $db->prepare($logQuery);
+      $statement->execute(array(':ip' => $ip, ':code' => $code, ':timestamp' => $timestamp, ':event' => $event));
+    } catch (PDOException $ex){
+         $result = flashMessage("An error occurred: " .$ex->getMessage());
+    }
+}
+}
 ?>
