@@ -16,6 +16,7 @@ include_once 'utilities.php';
 
     $link = $result['link'];
     $downloads = $result['downloads'];
+    $id = $result['id'];
 
     if($link == $code) {
       if($downloads < 3) {
@@ -23,16 +24,13 @@ include_once 'utilities.php';
         $select= $db->prepare('SELECT downloads FROM codes WHERE link = :code');
         $select->bindParam(':code', $code, PDO::PARAM_STR);
         $select->execute();
-        $bunghole = $select->fetch(PDO::FETCH_ASSOC);
+        $downloads = $select->fetch(PDO::FETCH_ASSOC);
 
-        $downloadCount = $downloads + 1;
-
-        $update = $db->prepare('UPDATE codes SET downloads = :downloadcount WHERE code = :code');
-        $update->bindParam(':code', $code, PDO::PARAM_STR);
-        $update->bindParam(':downloadcount', $downloadCount, PDO::PARAM_INT);
+        $update = $db->prepare('UPDATE codes SET downloads = downloads + 1 WHERE id = :id');
+        $update->bindParam(':id', $id, PDO::PARAM_STR);
         $update->execute();
       } catch (PDOException $ex){
-             $result = flashMessage("An error occurred: " .$ex->getMessage());
+             echo $ex->getMessage();
         }
 
         // Logging
@@ -52,9 +50,6 @@ include_once 'utilities.php';
         $file_name = "file.data";
         header("Content-Disposition: attachment; filename=\"$file_name\"");
         echo "Your download will start momentarily.";
-
-        echo $downloadCount;
-
       } else {
         echo "You have used your 3 downloads, please contact support if you feel this is incorrect.";
         // Logging
