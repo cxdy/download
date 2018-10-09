@@ -23,7 +23,7 @@ function generateRandomString($length = 10) {
 
 // checking if number of codes defined
 if ($argc != 2) {
-    die("Usage: redeem.php <number-of-codes>\n");
+    die("Usage: php -f redeem.php <number-of-codes>\n");
 } else {
 array_shift($argv);
 
