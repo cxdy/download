@@ -24,8 +24,8 @@ CREATE TABLE `codes` (
   `id` int(255) NOT NULL,
   `code` varchar(12) NOT NULL,
   `is_used` tinyint(1) NOT NULL DEFAULT '0',
-  `ip_address` varchar(25) NOT NULL,
-  `link` varchar(255) NOT NULL,
+  `ip_address` varchar(25) NOT NULL DEFAULT '::1',
+  `link` varchar(255) NOT NULL DEFAULT 'google.com',
   `downloads` int(225) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
