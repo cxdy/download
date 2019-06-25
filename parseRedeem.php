@@ -67,7 +67,7 @@ if(isset($_POST['redeemBtn'])){
               echo "<br />";
               echo "If not, ";
               // Modify this link (localhost:8080/DigitalDownload/ portion)
-              $link = "http://localhost:8888/DigitalDownload/download.php?code=$key";
+              $link = "http://10.0.0.7/download/download.php?code=$key";
               ?><a href="<?php echo $link; ?>">here's your unique download link.</a>
               <?php
 

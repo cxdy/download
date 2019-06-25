@@ -47,9 +47,29 @@ include_once 'utilities.php';
                $result = flashMessage("An error occurred: " .$ex->getMessage());
           }
 
-        $file_name = "file.data";
-        header("Content-Disposition: attachment; filename=\"$file_name\"");
-        echo "Your download will start momentarily.";
+          ignore_user_abort(true);
+          set_time_limit(0); // disable the time limit for this script
+           
+          $path = "/var/www/html/download/"; // change the path to fit your websites document structure
+           
+          $dl_file = 'OOS.mp4';
+          $fullPath = $path.$dl_file;
+          echo "Your download will start momentarily.";
+           
+          if ($fd = fopen ($fullPath, "r")) {
+              $fsize = filesize($fullPath);
+              $path_parts = pathinfo($fullPath);
+              header("Content-type: video/mp4");
+              header("Content-Disposition: attachment; filename=\"".$path_parts["basename"]."\"");
+              header("Content-length: $fsize");
+              header("Cache-control: private"); //use this to open files directly
+              while(!feof($fd)) {
+                  $buffer = fread($fd, 2048);
+                  echo $buffer;
+              }
+          }
+          fclose ($fd);
+          exit;
       } else {
         echo "You have used your 3 downloads, please contact support if you feel this is incorrect.";
         // Logging

@@ -1,12 +1,11 @@
 <?php
 //initialize variables to hold connection parameters
-$username = 'root';
-$dsn = 'mysql:host=localhost; dbname=download';
-$password = 'root';
+$username = 'cody';
+$password = 'jeff';
 
 try{
     //create an instance of the PDO class with the required parameters
-    $db = new PDO($dsn, $username, $password);
+    $db = new PDO("mysql:host=localhost;dbname=download", $username, $password);
 
     //set pdo error mode to exception
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
