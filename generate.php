@@ -5,8 +5,8 @@
 | Make sure to set database info below
 | Avoid leaving this script in a public directory. You can run this anywhere. 
 */
-$username = 'root';
-$password = 'ArB#tu9lWl';
+$username = 'user';
+$password = 'passwords';
 $db = new PDO("mysql:host=localhost;dbname=download", $username, $password);
 
 // generation function
