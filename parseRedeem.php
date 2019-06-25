@@ -53,13 +53,8 @@ if (isset($_POST['redeemBtn'])) {
                     // Kyle, front-end starts here.
                     /* You can do ?> anywhere and write straight HTML, or you can just parse it in PHP. Your call. */
                     /* Just make sure you start <?php again where its supposed to. */
-                    echo "Your download should start automatically."; // It shouldn't, fuck that.
-                    echo "<br />";
-                    echo "If not, ";
-                    // Modify this link (localhost:8080/DigitalDownload/ portion)
-                    $link = "http://10.0.0.7/download/download.php?code=$key";
-?><a href="<?php echo $link; ?>">here's your unique download link.</a>
-              <?php
+                    $link = 'http://10.0.0.7/download/download.php?code='.$key;
+                    header('Location: '.$link);
                     // Logging
                     date_default_timezone_set('America/New_York');
                     $timestamp = date('Y-m-d H:i:s');

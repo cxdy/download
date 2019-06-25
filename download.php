@@ -59,9 +59,9 @@ include_once 'utilities.php';
           if ($fd = fopen ($fullPath, "r")) {
               $fsize = filesize($fullPath);
               $path_parts = pathinfo($fullPath);
-              header("Content-type: video/mp4");
+              header("Content-type: application/octet-stream");
               header("Content-Disposition: attachment; filename=\"".$path_parts["basename"]."\"");
-              header("Content-length: $fsize");
+              header("Content-length: " . $fsize);
               header("Cache-control: private"); //use this to open files directly
               while(!feof($fd)) {
                   $buffer = fread($fd, 2048);
