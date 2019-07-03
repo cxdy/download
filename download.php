@@ -54,7 +54,6 @@ include_once 'utilities.php';
            
           $dl_file = 'OOS.mp4';
           $fullPath = $path.$dl_file;
-          echo "Your download will start momentarily.";
            
           if ($fd = fopen ($fullPath, "r")) {
               $fsize = filesize($fullPath);
